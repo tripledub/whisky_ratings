@@ -10,6 +10,10 @@ module Api
         save_whiskey
       end
 
+      def show
+        json_response(whiskey)
+      end
+
       private
 
       def build_whiskey
@@ -20,6 +24,10 @@ module Api
       def save_whiskey
         @whiskey.save!
         json_response(@whiskey, :created)
+      end
+
+      def whiskey
+        @whiskey ||= whiskey_scope.find(params[:id])
       end
 
       def whiskeys

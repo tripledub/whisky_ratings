@@ -64,3 +64,24 @@ describe 'creating a new whiskey' do
     end
   end
 end
+
+describe 'viewing a whiskey' do
+  let!(:whiskey) do
+    create(:whiskey, title: 'Bowmore 46 year old (distilled 1964), 42.9%')
+  end
+
+  let(:whiskey_id) { whiskey.id }
+
+  before { get "/api/v1/whiskeys/#{whiskey_id}" }
+
+  context 'when the record exists' do
+    it 'returns the whiskey' do
+      expect(json).not_to be_empty
+      expect(json['id']).to eq(whiskey_id)
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+  end
+end
