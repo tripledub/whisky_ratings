@@ -18,9 +18,7 @@ module Api
       end
 
       def save_whiskey
-        return unless @whiskey.save
-
-        json_response(@whiskey, :created)
+        json_response(@whiskey.save!, :created)
       end
 
       def whiskeys

@@ -27,9 +27,10 @@ describe 'listing whiskeys' do
 end
 
 describe 'creating a new whiskey' do
-  let(:valid_whiskey) do
+  let(:title) { 'Ardbeg Uigeadail, 54.2%' }
+  let(:whiskey) do
     {
-      title: 'Ardbeg Uigeadail, 54.2%',
+      title: title,
       description: 'With the Ardbeg 17 year old off the market, it’s nice to see a new Ardbeg in the line-up.',
       taste: 5,
       color: 5,
@@ -38,7 +39,7 @@ describe 'creating a new whiskey' do
   end
 
   context 'when the request is valid' do
-    before { post '/api/v1/whiskeys', params: { whiskey: valid_whiskey } }
+    before { post '/api/v1/whiskeys', params: { whiskey: whiskey } }
 
     it 'creates a whiskey' do
       expect(json['title']).to eq('Ardbeg Uigeadail, 54.2%')
@@ -46,6 +47,15 @@ describe 'creating a new whiskey' do
 
     it 'returns status code 201' do
       expect(response).to have_http_status(201)
+    end
+  end
+
+  context 'when the request is not valid' do
+    let(:title) { nil }
+    before { post '/api/v1/whiskeys', params: { whiskey: whiskey } }
+
+    it 'returns status code 422' do
+      expect(response).to have_http_status(422)
     end
   end
 end
