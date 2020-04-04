@@ -18,7 +18,8 @@ module Api
       end
 
       def save_whiskey
-        json_response(@whiskey.save!, :created)
+        @whiskey.save!
+        json_response(@whiskey, :created)
       end
 
       def whiskeys
