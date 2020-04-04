@@ -16,14 +16,38 @@ describe 'listing whiskeys' do
   end
 
   describe 'returned results' do
-    subject { JSON.parse(response.body) }
-
     it 'contains whiskey_one' do
-      expect(subject.first['title']).to eq(whiskey_one.title)
+      expect(json.first['title']).to eq(whiskey_one.title)
     end
 
     it 'contains whiskey_two' do
-      expect(subject.last['title']).to eq(whiskey_two.title)
+      expect(json.last['title']).to eq(whiskey_two.title)
     end
   end
+end
+
+describe 'creating a new whiskey' do
+  let(:valid_whiskey) do
+    {
+      title: 'Ardbeg Uigeadail, 54.2%',
+      description: 'With the Ardbeg 17 year old off the market, it’s nice to see a new Ardbeg in the line-up.',
+      taste: 5,
+      color: 5,
+      smokiness: 5
+    }
+  end
+
+  context 'when the request is valid' do
+    before { post '/api/v1/whiskeys', params: { whiskey: valid_whiskey} }
+
+    it 'creates a whiskey' do
+      byebug
+      expect(json['title']).to eq('Ardbeg Uigeadail, 54.2%')
+    end
+
+    it 'returns status code 201' do
+      expect(response).to have_http_status(201)
+    end
+  end
+
 end
