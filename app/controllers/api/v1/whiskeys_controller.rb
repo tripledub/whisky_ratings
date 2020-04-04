@@ -2,7 +2,7 @@ module Api
   module V1
     class WhiskeysController < ApplicationController
       def index
-        render json: whiskeys
+        json_response(whiskeys)
       end
 
       def create
@@ -20,7 +20,7 @@ module Api
       def save_whiskey
         return unless @whiskey.save
 
-        render json: @whiskey, status: :created
+        json_response(@whiskey, :created)
       end
 
       def whiskeys
