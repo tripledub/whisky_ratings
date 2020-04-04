@@ -38,10 +38,9 @@ describe 'creating a new whiskey' do
   end
 
   context 'when the request is valid' do
-    before { post '/api/v1/whiskeys', params: { whiskey: valid_whiskey} }
+    before { post '/api/v1/whiskeys', params: { whiskey: valid_whiskey } }
 
     it 'creates a whiskey' do
-      byebug
       expect(json['title']).to eq('Ardbeg Uigeadail, 54.2%')
     end
 
@@ -49,5 +48,4 @@ describe 'creating a new whiskey' do
       expect(response).to have_http_status(201)
     end
   end
-
 end
