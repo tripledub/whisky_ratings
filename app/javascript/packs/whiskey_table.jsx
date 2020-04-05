@@ -1,7 +1,16 @@
 import React from 'react';
+import WhiskeyRow from './whiskey_row';
 
 class WhiskeyTable extends React.Component {
   render() {
+    let whiskeys = [];
+
+    this.props.whiskeys.forEach(function(whiskey) {
+      whiskeys.push(
+        <WhiskeyRow whiskey={whiskey} key={whiskey.id} />
+      );
+    });
+
     return(
       <table className="table table-striped">
         <thead>
@@ -12,7 +21,9 @@ class WhiskeyTable extends React.Component {
             <th className="col-md-4">Smokiness</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {whiskeys}
+        </tbody>
       </table>
     )
   }

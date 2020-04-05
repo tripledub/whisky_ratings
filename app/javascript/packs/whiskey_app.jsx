@@ -5,6 +5,42 @@ import WhiskeyTable from './whiskey_table';
 
 
 class WhiskeyApp extends React.Component {
+  // getInitialState() {
+  //   return { whiskeys: [] }
+  // }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      whiskeys: []
+    };
+  }
+
+  componentDidMount() {
+    this.getWhiskeys();
+  }
+
+  getWhiskeys() {
+    fetch('/api/v1/whiskeys')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            whiskeys: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   render() {
     return(
       <div className="container">
@@ -13,7 +49,7 @@ class WhiskeyApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <WhiskeyTable />
+            <WhiskeyTable whiskeys={this.state.whiskeys} />
           </div>
         </div>
       </div>
