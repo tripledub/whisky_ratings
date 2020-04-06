@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WhiskeyTable from './whiskey_table';
-// import PropTypes from 'prop-types'
-
+import WhiskeySearchForm from './whiskey_search_form';
 
 class WhiskeyApp extends React.Component {
-  // getInitialState() {
-  //   return { whiskeys: [] }
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,12 +11,17 @@ class WhiskeyApp extends React.Component {
       isLoaded: false,
       whiskeys: []
     };
+    this.processSearch = this.processSearch.bind(this)
   }
 
   componentDidMount() {
     this.getWhiskeys();
   }
 
+  processSearch (whiskeys) {
+    this.setState({ whiskeys: whiskeys });
+  }
+ 
   getWhiskeys() {
     fetch('/api/v1/whiskeys')
       .then(res => res.json())
@@ -46,6 +46,11 @@ class WhiskeyApp extends React.Component {
       <div className="container">
         <div className="jumbotron">
           <h1>Whiskey App</h1>
+        </div>
+        <div className="row">
+          <div className="col-md-4">
+            <WhiskeySearchForm processSearch={this.processSearch} />
+          </div>
         </div>
         <div className="row">
           <div className="col-md-12">
