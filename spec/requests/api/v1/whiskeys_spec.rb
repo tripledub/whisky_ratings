@@ -117,7 +117,11 @@ describe 'searching whiskeys' do
 
   let(:query) { 'Bowmore' }
 
-  before { get '/api/v1/whiskeys/search', params: { query: query } }
+  let(:search_params) do
+    { search: { query: query, color: 0, smokiness: nil, taste: nil } }
+  end
+
+  before { get '/api/v1/whiskeys/search', params: search_params }
 
   describe 'returned results' do
     it 'contains whiskey_one' do

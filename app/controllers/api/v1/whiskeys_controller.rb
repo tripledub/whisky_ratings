@@ -15,12 +15,8 @@ module Api
       end
 
       def search
-        query = params[:query]
         json_response(
-          whiskey_scope.where(
-            'title LIKE ? OR description LIKE ?',
-            "%#{query}%", "%#{query}%"
-          )
+          WhiskeyFinder.search(search_params.to_h)
         )
       end
 
@@ -42,6 +38,13 @@ module Api
 
       def whiskeys
         @whiskeys ||= whiskey_scope.to_a
+      end
+
+      def search_params
+        search_params = params[:search]
+        search_params ? search_params.permit(
+          :query, :color, :smokiness, :taste
+        ) : {}
       end
 
       def whiskey_scope
