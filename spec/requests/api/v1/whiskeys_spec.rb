@@ -97,3 +97,31 @@ describe 'viewing a whiskey' do
     end
   end
 end
+
+describe 'searching whiskeys' do
+  let!(:whiskey_one) do
+    create(
+      :whiskey,
+      title: 'Bowmore 46 year old (distilled 1964), 42.9%',
+      description: 'Bowmore 46 year old (distilled 1964), 42.9%'
+    )
+  end
+
+  let!(:whiskey_two) do
+    create(
+      :whiskey,
+      title: 'Glenfarclas Family Casks 1954 Cask #1260, 47.2%',
+      description: 'Glenfarclas Family Casks 1954 Cask #1260, 47.2%'
+    )
+  end
+
+  let(:query) { 'Bowmore' }
+
+  before { get '/api/v1/whiskeys/search', params: { query: query } }
+
+  describe 'returned results' do
+    it 'contains whiskey_one' do
+      expect(json.first['title']).to eq(whiskey_one.title)
+    end
+  end
+end

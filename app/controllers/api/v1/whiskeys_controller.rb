@@ -14,6 +14,16 @@ module Api
         json_response(whiskey)
       end
 
+      def search
+        query = params[:query]
+        json_response(
+          whiskey_scope.where(
+            'title LIKE ? OR description LIKE ?',
+            "%#{query}%", "%#{query}%"
+          )
+        )
+      end
+
       private
 
       def build_whiskey
