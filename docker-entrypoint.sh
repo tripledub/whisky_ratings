@@ -11,7 +11,7 @@ else
   bundle check || bundle install --without production
 fi
 
-yarn install --check-files
+# yarn install --check-files
 
 ## Run any pending migrations
 bundle exec rails db:migrate
