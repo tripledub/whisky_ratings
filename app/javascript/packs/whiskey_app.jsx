@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WhiskeyTable from './whiskey_table';
@@ -23,22 +24,22 @@ class WhiskeyApp extends React.Component {
   }
  
   getWhiskeys() {
-    fetch('/api/v1/whiskeys')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            whiskeys: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+      let self = this
+      axios(
+        {
+          method: 'GET', 
+          url: '/api/v1/whiskeys/',
+          headers: {
+            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+          }
         }
       )
+      .then(function(response) {
+        self.setState({
+          isLoaded: true,
+          whiskeys: response.data
+        });
+      }); 
   }
 
   render() {
