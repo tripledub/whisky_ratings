@@ -48,7 +48,7 @@ class WhiskeyApp extends React.Component {
           <h1>Whiskey App</h1>
         </div>
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-12">
             <WhiskeySearchForm processSearch={this.processSearch} />
           </div>
         </div>

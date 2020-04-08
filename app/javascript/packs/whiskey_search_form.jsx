@@ -40,39 +40,52 @@ class WhiskeySearchForm extends React.Component {
   render() {
 
     return(
-      <div>
-        <input
-          onChange={this.performSearch.bind(this)}
-          type="text"
-          className="form-control"
-          placeholder="Search ..."
-          ref="query"
-        />
-        <select onChange={this.performSearch.bind(this)} ref="taste" className="form-control">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <select onChange={this.performSearch.bind(this)} ref="color" className="form-control">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <select onChange={this.performSearch.bind(this)} ref="smokiness" className="form-control">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
+      <form>
+        <div className="form-row">
+          <div className="col-md-6">
+            <input
+              onChange={this.performSearch.bind(this)}
+              type="text"
+              className="form-control"
+              placeholder="Search ..."
+              ref="query"
+            />
+          </div>
+          <div className="col-md-2">
+            <select onChange={this.performSearch.bind(this)} ref="taste" className="form-control">
+              <option>Taste</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div className="col-md-2">
+            <select onChange={this.performSearch.bind(this)} ref="color" className="form-control">
+              <option>Colour</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div className="col-md-2">
+            <select onChange={this.performSearch.bind(this)} ref="smokiness" className="form-control">
+              <option>Smokiness</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+      </form>
     )
   }
 }
