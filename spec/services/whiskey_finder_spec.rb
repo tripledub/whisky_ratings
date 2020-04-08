@@ -58,6 +58,24 @@ RSpec.describe WhiskeyFinder do
         expect(subject).to match_array([very_smoky_whiskey])
       end
     end
+
+    describe 'case insensitive search' do
+      context 'when the query is "tasty"' do
+        let(:query) { 'tasty' }
+
+        it 'returns both the tasty whiskeys' do
+          expect(subject).to match_array([tasty_whiskey, very_tasty_whiskey])
+        end
+      end
+
+      context 'when the query is "TASTY"' do
+        let(:query) { 'TASTY' }
+
+        it 'returns both the tasty whiskeys' do
+          expect(subject).to match_array([tasty_whiskey, very_tasty_whiskey])
+        end
+      end
+    end
   end
 
   describe 'Searching characteristics' do

@@ -9,7 +9,7 @@ class WhiskeyFinder
   def search
     whiskey_scope
       .where(
-        'title LIKE ? OR description LIKE ?',
+        'title ILIKE ? OR description ILIKE ?',
         "%#{query}%", "%#{query}%"
       )
       .minimum_color(color.to_i)
